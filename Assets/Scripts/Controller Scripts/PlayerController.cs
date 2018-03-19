@@ -9,6 +9,8 @@ public class Boundary
 }
 public class PlayerController : MonoBehaviour
 {
+    //Rigidbody rigidBody;
+    
     public float speed;
     public float tilt;
     public Boundary boundary;
@@ -29,7 +31,10 @@ public class PlayerController : MonoBehaviour
         //playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         //enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
         //
-        
+        //rigidBody = GetComponent<Rigidbody>();
+
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         //if (playerTransform.position.x == enemyTransform.position.x)
         {
@@ -51,15 +56,37 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         GetComponent<Rigidbody>().velocity = movement*speed;
-        
 
-        //while()
+        /*
+        int i = 0;
+        foreach (GameObject enemy in enemies)
+        {
+            enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
+            while (playerTransform.position.x != enemyTransform.position.x)
+            {
+                if (playerTransform.position.x < enemyTransform.position.x)
+                {
+                    rigidBody.AddRelativeForce(Vector3.left * 20);
+                }
+                if (playerTransform.position.x > enemyTransform.position.x)
+                {
+                    rigidBody.AddRelativeForce(Vector3.right * 20);
+                }
+                if (playerTransform.position.x == enemyTransform.position.x)
+                {
+                    Instantiate(shot, shotSpawn.position, shotSpawn.rotation); // as GameObject
+                    GetComponent<AudioSource>().Play();
+                }
+            }
+            
+        }*/
+                        
               
         GetComponent<Rigidbody>().position = new Vector3
         (
             Mathf.Clamp(GetComponent<Rigidbody>().position.x, boundary.xMin, boundary.xMax),
             0.0f,
-            Mathf.Clamp(GetComponent<Rigidbody>().position.z, boundary.zMin, boundary.zMax)
+            Mathf.Clamp(GetComponent<Rigidbody>().position.z, boundary.zMin+(float)0.5, boundary.zMax)
         );
 
         GetComponent<Rigidbody>().rotation = Quaternion.Euler(0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
