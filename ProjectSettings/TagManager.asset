@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Boundary
   - Enemy
+  - LevelController
+  - Asteroid1
   layers:
   - Default
   - TransparentFX

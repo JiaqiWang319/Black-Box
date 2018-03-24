@@ -39,11 +39,6 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        // automate player moves
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        //enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
-        //
-
         gameOver = false;
         restart = false;
         waveCount = 1;
@@ -79,7 +74,6 @@ public class GameController : MonoBehaviour
 
     IEnumerator SpawnWaves()
     {
-        float[] xPos = new float[10];
         yield return new WaitForSeconds(startWait);
         while (true)
         {
@@ -90,59 +84,8 @@ public class GameController : MonoBehaviour
                 Quaternion spawnRotation = Quaternion.identity;
                 Instantiate(hazard, spawnPosition, spawnRotation);
 
-                /*
-                xPos[i] = hazard.transform.position.x;
-
-                while (playerTransform.position.x > xPos[i])
-                {
-                    playerTransform.Translate(Vector3.left * Time.deltaTime, Space.World);
-                    if (playerTransform.position.x == xPos[i])
-                    {
-                        //nextFire = Time.time + fireRate;
-                        //    GameObject clone = 
-                        Instantiate(shot, shotSpawn.position, shotSpawn.rotation); // as GameObject
-                        GetComponent<AudioSource>().Play();
-                    }
-                }
-                while (playerTransform.position.x < xPos[i])
-                {
-                    playerTransform.Translate(Vector3.right * Time.deltaTime, Space.World);
-                    if (playerTransform.position.x == xPos[i])
-                    {
-                        //nextFire = Time.time + fireRate;
-                        //    GameObject clone = 
-                        Instantiate(shot, shotSpawn.position, shotSpawn.rotation); // as GameObject
-                        GetComponent<AudioSource>().Play();
-                    }
-                }
-                */
-
                 yield return new WaitForSeconds(spawnWait);
             }
-
-            /*
-            foreach (float x in xPos)
-            {
-                while (playerTransform.position.x > x)
-                {
-                    playerTransform.Translate(Vector3.left * Time.deltaTime);
-                }
-                while (playerTransform.position.x < x)
-                {
-                    playerTransform.Translate(Vector3.right * Time.deltaTime);
-                }
-
-                if (playerTransform.position.x == x)
-                {
-                    //nextFire = Time.time + fireRate;
-                    //    GameObject clone = 
-                    Instantiate(shot, shotSpawn.position, shotSpawn.rotation); // as GameObject
-                    GetComponent<AudioSource>().Play();
-                }
-            }
-            */
-
-            //enemyTransform = GameObject.FindGameObjectsWithTag("Enemy").transform;
 
             yield return new WaitForSeconds(waveWait);
 

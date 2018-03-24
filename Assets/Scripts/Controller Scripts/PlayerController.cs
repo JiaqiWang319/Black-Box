@@ -21,19 +21,11 @@ public class PlayerController : MonoBehaviour
 
     private float nextFire;
 
-    GameObject[] enemies;
     private Transform enemyTransform;
     private Transform playerTransform;
 
     void Update()
     {
-        // automate player moves
-        //playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        //enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
-        //
-        //rigidBody = GetComponent<Rigidbody>();
-
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         //if (playerTransform.position.x == enemyTransform.position.x)
@@ -44,7 +36,6 @@ public class PlayerController : MonoBehaviour
             GetComponent<AudioSource>().Play();
         }
 
-        //Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
     }
 
     private void FixedUpdate()
@@ -56,32 +47,7 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         GetComponent<Rigidbody>().velocity = movement*speed;
-
-        /*
-        int i = 0;
-        foreach (GameObject enemy in enemies)
-        {
-            enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
-            while (playerTransform.position.x != enemyTransform.position.x)
-            {
-                if (playerTransform.position.x < enemyTransform.position.x)
-                {
-                    rigidBody.AddRelativeForce(Vector3.left * 20);
-                }
-                if (playerTransform.position.x > enemyTransform.position.x)
-                {
-                    rigidBody.AddRelativeForce(Vector3.right * 20);
-                }
-                if (playerTransform.position.x == enemyTransform.position.x)
-                {
-                    Instantiate(shot, shotSpawn.position, shotSpawn.rotation); // as GameObject
-                    GetComponent<AudioSource>().Play();
-                }
-            }
-            
-        }*/
-                        
-              
+                                 
         GetComponent<Rigidbody>().position = new Vector3
         (
             Mathf.Clamp(GetComponent<Rigidbody>().position.x, boundary.xMin, boundary.xMax),
