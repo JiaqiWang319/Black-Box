@@ -50,10 +50,6 @@ public class LevelOneController : MonoBehaviour
 
 
 
-
-
-
-
     // commented out stuff I don't think I need for this controller script
     // or if they're duplicates from the other class I copied over
 
@@ -72,15 +68,6 @@ public class LevelOneController : MonoBehaviour
     float zOffset = 0f;
     float xMax = 12f;  // rightmost x position on playing field
     float zMax = 12f;  // uppermost z position on playing field
-
-
-
-    // automate player/enemy moves
-    //private Transform playerTransform;
-    //private Transform enemyTransform;
-    //private float targetManeuver;
-    //public Vector2 maneuverTime;
-    //public Vector2 maneuverWait;
 
     public GameObject shot;
     public Transform shotSpawn;
